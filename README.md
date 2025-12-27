@@ -45,7 +45,7 @@ Get the Code: Clone the repository or download the source files.
 
 Bash
 
-git clone [https://github.com/Japeth07/Calculator.git](https://github.com/japeth07/light-dark-calculator.git)
+git clone [https://github.com/Japeth07/Calculator.git]
 Open the App: Navigate to the project folder and open index.html in any modern web browser (Chrome, Firefox, Safari, Edge).
 
 Calculate: Use the on-screen buttons to perform math.
