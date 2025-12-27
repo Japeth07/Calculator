@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <button id="theme-switch" class="icon-button" aria-label="Switch to Dark Mode">
+             </button>
+
+        <div class="display-container">
+            <div id="previous-operation" class="previous-operation"></div>
+            <div id="current-result" class="current-result">0</div>
+        </div>
+
+        <div class="keypad">
+            <button class="clear operator-top" data-key="C">C</button>
+            <button class="sign operator-top" data-key="±">±</button>
+            <button class="percent operator-top" data-key="%">%</button>
+            <button class="divide operator-right" data-key="/">/</button>
+
+            <button class="number" data-key="7">7</button>
+            <button class="number" data-key="8">8</button>
+            <button class="number" data-key="9">9</button>
+            <button class="multiply operator-right" data-key="*">×</button>
+
+            <button class="number" data-key="4">4</button>
+            <button class="number" data-key="5">5</button>
+            <button class="number" data-key="6">6</button>
+            <button class="subtract operator-right" data-key="-">−</button>
+
+            <button class="number" data-key="1">1</button>
+            <button class="number" data-key="2">2</button>
+            <button class="number" data-key="3">3</button>
+            <button class="add operator-right" data-key="+">+</button>
+
+            <button class="number zero" data-key="0">0</button>
+            <button class="backspace" data-key="DEL">⌫</button> 
+            <button class="equals operator-right primary-op" data-key="=">=</button>
+        </div>
+        
+        <div class="history-panel">
+            <h3 id="history-toggle">History <span class="arrow">▼</span></h3>
+            <ul id="history-list" class="hidden">
+                </ul>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

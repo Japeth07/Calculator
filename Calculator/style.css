@@ -1,0 +1,226 @@
+:root {
+    /* Base Background (Orange) */
+    --page-bg: #ff7f33; 
+    
+    /* Light Mode Variables (White Display, Dark Keys) */
+    --calc-bg: #ffffff; /* Main calculator body remains white */
+    --display-bg: #ffffff;
+    --display-text-color: #212121; /* Black display text */
+    --previous-text-color: #5a5a5a;
+    
+    /* BUTTONS (Now Dark Keys in Light Mode) */
+    --button-bg: #3c3c3c; /* Dark Grey for number/backspace keys */
+    --button-text: #ffffff; /* White text for number/backspace keys */
+    
+    /* OPERATORS TOP (C, ±, %) (Now Dark Keys in Light Mode) */
+    --operator-top-bg: #3c3c3c; 
+    --operator-top-text: #ffffff;
+    
+    /* OPERATORS RIGHT (/, x, -, +) (Now Dark Keys in Light Mode) */
+    --operator-right-bg: #212121; /* Black for primary operators */
+    --operator-right-text: #ffffff;
+    
+    /* PRIMARY OP (=) (Orange remains) */
+    --primary-op-bg: #ff7f33; 
+    --primary-op-text: #ffffff; 
+    
+    --border-color: #eeeeee; 
+    --history-bg: #ffffff;
+    --history-text: #333;
+}
+
+/* Dark Mode Variables (Black Theme) */
+body.dark-mode {
+    --calc-bg: #212121;
+    --display-bg: #212121;
+    --display-text-color: #ffffff;
+    --previous-text-color: #bdbdbd;
+    --button-bg: #3c3c3c;
+    --button-text: #ffffff;
+    --operator-top-bg: #3c3c3c;
+    --operator-top-text: #ffffff;
+    --operator-right-bg: #282828;
+    --operator-right-text: #ffffff;
+    --primary-op-bg: #ff7f33;
+    --primary-op-text: #ffffff;
+    --border-color: #444;
+    --history-bg: #282828;
+    --history-text: #eee;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    transition: background-color 0.3s;
+}
+
+.calculator {
+    width: 350px;
+    background-color: var(--calc-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Display Area Styling */
+.display-container {
+    background-color: var(--display-bg);
+    padding: 20px 25px;
+    text-align: right;
+    transition: background-color 0.3s;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.previous-operation {
+    font-size: 1.1em;
+    color: var(--previous-text-color);
+    min-height: 1.1em;
+}
+
+.current-result {
+    font-size: 5em;
+    font-weight: 700;
+    color: var(--display-text-color);
+    line-height: 1.1;
+}
+
+/* Keypad Layout */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    padding: 10px;
+    background-color: var(--calc-bg);
+}
+
+.keypad button {
+    height: 75px;
+    font-size: 1.8em;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    font-weight: 500;
+    color: var(--button-text); /* Uses --button-text (now white) */
+    background-color: var(--button-bg); /* Uses --button-bg (now dark grey) */
+}
+
+.keypad button:active {
+    opacity: 0.8;
+}
+
+/* Operator and Primary Button Styles */
+.operator-top {
+    background-color: var(--operator-top-bg); /* Uses --operator-top-bg (now dark grey) */
+    color: var(--operator-top-text); /* Uses --operator-top-text (now white) */
+}
+
+.operator-right {
+    background-color: var(--operator-right-bg); /* Uses --operator-right-bg (now black) */
+    color: var(--operator-right-text); /* Uses --operator-right-text (now white) */
+}
+
+.primary-op {
+    background-color: var(--primary-op-bg);
+    color: var(--primary-op-text) !important; 
+    font-weight: 700;
+}
+
+.backspace {
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    font-size: 1.5em; 
+}
+
+
+/* FIX: Ensures equals button text is always visible in Light Mode */
+body:not(.dark-mode) .keypad button.equals {
+    color: var(--primary-op-text); 
+}
+
+/* Theme Switch Icon Button (Kept in for switching themes) */
+#theme-switch {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10;
+    color: var(--previous-text-color);
+    border-radius: 50%;
+    transition: color 0.3s;
+}
+
+#theme-switch:hover {
+    color: var(--primary-op-bg);
+}
+
+/* Specific button overrides */
+.zero {
+    grid-column: span 2;
+}
+
+
+/* History Panel Styling */
+.history-panel {
+    padding: 15px 20px;
+    background-color: var(--history-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+#history-toggle {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--history-text);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    transition: transform 0.2s;
+}
+
+#history-list.hidden {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+}
+
+#history-list:not(.hidden) {
+    max-height: 150px;
+    opacity: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-top: 5px;
+    transition: max-height 0.5s ease-in, opacity 0.3s ease-in, padding 0.5s ease-in;
+}
+
+#history-list li {
+    list-style: none;
+    padding: 5px 0;
+    font-size: 0.9em;
+    color: var(--previous-text-color);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted var(--border-color);
+}
